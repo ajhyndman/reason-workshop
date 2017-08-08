@@ -6,9 +6,15 @@ let make _children => {
   render: fun {handle} => {
     let handleClick _ _ =>
       /* change this function to log "clicked" to the JS console */
+      Js.log "clicked";
       ();
-    let handleHover _ _ =>
+    let handleHover event _ =>
       /* change this function to log "hover began" when the event is a mouseover event  and "hover ended" when the event is a mouseleave event */
+      switch (ReactEventRe.Mouse._type event) {
+        | "mouseenter" => Js.log "hover began"
+        | "mouseleave" => Js.log "hover ended"
+        | _ => ()
+      };
       ();
     <div
       style=boxStyle
